@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage ('checkout') {
+            steps {
+                git url: 'https://github.com/kennethcdeguzman/calculator.git'
+            }
+        }
+        stage ('build') {
+            steps {
+                sh 'cd calculator && ./gradlew compileJava'
+            }
+        }
+        stage ('test') {
+            steps {
+                sh 'cd calculator && ./gradlew test'
+            }
+        }
+    }
+}
