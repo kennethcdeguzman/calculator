@@ -18,8 +18,13 @@ pipeline {
         }
         stage ('code coverage') {
             steps {
-                sh 'cd calculator && ./gradlew test jacocoTestCoverageVerification'
                 sh 'cd calculator && ./gradlew test jacocoTestReport'
+                publishHTML (target: [
+                        reportDir: 'build/reports/jacoco/test/html',
+                        reportFiles: 'index.html',
+                        reportName: "JaCoCo Report"
+                ])
+                sh 'cd calculator && ./gradlew test jacocoTestCoverageVerification'
             }
         }
     }
