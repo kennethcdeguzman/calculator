@@ -27,6 +27,16 @@ pipeline {
                 sh 'cd calculator && ./gradlew test jacocoTestCoverageVerification'
             }
         }
+        stage ('package') {
+            steps {
+                sh 'cd calculator && ./gradlew build'
+            }
+        }
+        stage ('docker build') {
+            steps {
+                sh 'cd calculator && docker build -t thekennymac/calculator .'
+            }
+        }
     }
     post {
         always {
