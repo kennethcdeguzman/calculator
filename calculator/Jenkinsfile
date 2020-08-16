@@ -44,7 +44,7 @@ pipeline {
     post {
         def messageColor = 'success'
         always {
-            color = ${currentBuild.currentResult} == 'FAILURE' ? 'danger' : 'success'
+            messageColor = ${currentBuild.currentResult} == 'FAILURE' ? 'danger' : 'success'
             slackSend channel: '#jenkins', color: messageColor, message: "your pipeline ${currentBuild.fullDisplayName} has ${currentBuild.currentResult}"
         }
     }
