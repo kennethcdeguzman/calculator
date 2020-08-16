@@ -42,6 +42,7 @@ pipeline {
         stage ('docker build') {
             steps {
                 script {
+                    sh 'cd calculator'
                     docker.build registry + ":$BUILD_NUMBER"
                 }
             }
@@ -49,7 +50,6 @@ pipeline {
         stage ('docker push') {
             steps {
                 script {
-                    sh 'cd calculator'
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
                     }
