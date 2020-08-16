@@ -5,6 +5,7 @@ pipeline {
     stages {
         stage ('checkout') {
             steps {
+                slackSend channel:"#jenkins", color:"#0066ff" , message: "your pipeline job ${currentBuild.number} has started"
                 git url: 'https://github.com/kennethcdeguzman/calculator.git'
             }
         }
