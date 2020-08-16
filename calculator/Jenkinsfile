@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( '', registryCredential ) {
-                        def customImage = docker.build(registry + ":$BUILD_NUMBER", "-f Dockerfile ./calculator")
+                        def customImage = docker.build(registry + ":$BUILD_NUMBER", "-f calculator/Dockerfile .")
                         customImage.push()
                     }
                 }
