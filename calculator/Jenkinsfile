@@ -1,3 +1,6 @@
+
+def messageColor = 'success'
+
 pipeline {
     agent {
         label 'docker-agent'
@@ -41,8 +44,8 @@ pipeline {
             }
         }
     }
+
     post {
-        def messageColor = 'success'
         always {
             messageColor = ${currentBuild.currentResult} == 'FAILURE' ? 'danger' : 'success'
             slackSend channel: '#jenkins', color: messageColor, message: "your pipeline ${currentBuild.fullDisplayName} has ${currentBuild.currentResult}"
