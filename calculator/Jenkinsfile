@@ -1,4 +1,8 @@
 pipeline {
+    environment {
+        registry = "thekennymac/calculator"
+        registryCredential = 'dockerhub'
+    }
     agent {
         label 'docker-agent'
     }
@@ -37,7 +41,18 @@ pipeline {
         }
         stage ('docker build') {
             steps {
-                sh 'cd calculator && docker build -t thekennymac/calculator .'
+                script {
+                    docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+        stage ('docker push') {
+            steps {
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
             }
         }
     }
