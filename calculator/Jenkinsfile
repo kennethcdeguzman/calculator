@@ -3,9 +3,7 @@ pipeline {
         registry = "thekennymac/calculator"
         registryCredential = 'dockerhub'
     }
-    agent {
-        label 'docker-agent'
-    }
+    agent any
     stages {
         stage ('checkout') {
             steps {
