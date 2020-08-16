@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker-agent'
+    }
     stages {
         stage ('checkout') {
             steps {
@@ -39,8 +41,10 @@ pipeline {
         }
     }
     post {
+        def messageColor = 'success'
         always {
-            slackSend channel: '#jenkins', color: 'success', message: "your pipeline ${currentBuild.fullDisplayName} has finished"
+            color = ${currentBuild.currentResult} == 'FAILURE' ? 'danger' : 'success'
+            slackSend channel: '#jenkins', color: messageColor, message: "your pipeline ${currentBuild.fullDisplayName} has ${currentBuild.currentResult}"
         }
     }
 }
