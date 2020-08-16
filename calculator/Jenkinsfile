@@ -49,6 +49,7 @@ pipeline {
         stage ('docker push') {
             steps {
                 script {
+                    sh 'cd calculator'
                     docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
                     }
