@@ -42,7 +42,7 @@ pipeline {
                 script {
                     sh 'whoami'
                     docker.withRegistry( '', registryCredential ) {
-                        def customImage = docker.build(registry + ":$BUILD_NUMBER", "-f calculator/Dockerfile .")
+                        def customImage = docker.build(registry + ":latest", "-f calculator/Dockerfile .")
                         customImage.push()
                     }
                 }
@@ -51,7 +51,7 @@ pipeline {
         stage ('deploy staging') {
             steps {
                 script {
-                    sh 'docker run -d --rm -p 8765:8090 --name calculator ' + registry + ":$BUILD_NUMBER"
+                    sh 'docker run -d --rm -p 8765:8090 --name calculator ' + registry + ":latest"
                 }
             }
         }
