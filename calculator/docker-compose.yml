@@ -3,6 +3,6 @@ services:
   calculator:
     image: thekennymac/calculator:latest
     ports:
-      - 8090
+      - 8765:8090
   redis:
     image: redis:latest

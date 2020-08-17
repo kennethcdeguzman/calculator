@@ -60,8 +60,7 @@ pipeline {
             steps {
                 script {
                     sleep 60
-                    def CALCULATOR_PORT = sh '$(docker-compose -f calculator/docker-compose.yml port calculator 8090 | cut -d: -f2)'
-                    sh 'test $(curl 172.17.0.1:' +CALCULATOR_PORT+ '/sum?a=1\\&b=2) -eq 3'
+                    sh 'test $(curl 172.17.0.1:8765/sum?a=1\\&b=2) -eq 3'
                 }
             }
         }
