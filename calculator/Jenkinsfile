@@ -58,7 +58,7 @@ pipeline {
         stage ('acceptance test') {
             steps {
                 script {
-                    sleep 120
+                    sleep 60
                     sh 'test $(curl 172.17.0.1:8765/sum?a=1\\&b=2) -eq 3'
                 }
             }
@@ -70,7 +70,6 @@ pipeline {
         always {
             script {
                 sh "docker stop calculator"
-                sh "docker rm calculator"
             }
         }
         success {
