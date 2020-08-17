@@ -67,12 +67,12 @@ pipeline {
     }
 
     post {
-        always {
-            script {
+//        always {
+//            script {
 //                sh "docker stop calculator"
 //                sh "docker rm calculator"
-            }
-        }
+//            }
+//        }
         success {
             slackSend channel: '#jenkins', color: 'success', message: "your pipeline ${currentBuild.fullDisplayName} has ${currentBuild.currentResult}"
         }
