@@ -58,7 +58,7 @@ pipeline {
         stage ('acceptance test') {
             steps {
                 script {
-                    sleep 60
+                    sleep 120
                     sh 'test $(curl localhost:8765/sum?a=1\\&b=2) -eq 3'
                 }
             }
