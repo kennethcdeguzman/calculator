@@ -59,7 +59,7 @@ pipeline {
             steps {
                 script {
                     sleep 60
-                    sh './acceptance_test.sh'
+                    sh 'calculator/acceptance_test.sh'
                 }
             }
         }
@@ -67,6 +67,12 @@ pipeline {
     }
 
     post {
+        always {
+            script {
+                sh "docker stop calculator"
+                sh "docker rm calculator"
+            }
+        }
         success {
             slackSend channel: '#jenkins', color: 'success', message: "your pipeline ${currentBuild.fullDisplayName} has ${currentBuild.currentResult}"
         }
