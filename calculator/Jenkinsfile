@@ -69,8 +69,8 @@ pipeline {
     post {
         always {
             script {
-                sh "docker stop calculator"
-                sh "docker rm calculator"
+//                sh "docker stop calculator"
+//                sh "docker rm calculator"
             }
         }
         success {
